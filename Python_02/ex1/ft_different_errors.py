@@ -1,20 +1,38 @@
 def garden_operations():
+    """
+    Demonstrates handling of various Python exceptions. This function tests
+    different error types such as ValueError, ZeroDivisionError,
+    FileNotFoundError, and KeyError. It also shows how to handle multiple
+    exceptions together. Each exception is caught and its message is printed
+    to the console, allowing the program to continue execution.
+    """
     print("=== Garden Error Types Demo ===\n")
     try:
-        input_ =  int(input())
-    except ValueError:
         print("Testing ValueError...")
-        print("Caught ValueError: invalid literal for int()")
-    except ZeroDivisionError:
+        int("hello")
+    except ValueError as e:
+        print(f"Caught ValueError: {e}\n")
+    try:
         print("Testing ZeroDivisionError...")
-        print("Caught ZeroDivisionError: division by zero")
-    except FileNotFoundError:
+        5 / 0
+    except ZeroDivisionError as e:
+        print(f"Caught ZeroDivisionError: {e}\n")
+    try:
         print("Testing FileNotFoundError...")
-        print("Caught FileNotFoundError: No such file 'missing.txt'")
-    except KeyError:
+        open("missing.txt")
+    except FileNotFoundError as e:
+        print(f"Caught FileNotFoundError: {e}\n")
+    try:
         print("Testing KeyError...")
-        print("Caught KeyError: 'missing\_plant'")
-    except:
+        data = {"plant1": "rose"}
+        print(data["missing_plant"])
+    except KeyError as e:
+        print(f"Caught KeyError: {e}\n")
+    try:
         print("Testing multiple errors together...")
-        print("Caught an error, but program continues!")
+        int("hello")
+        5 / 0
+        open("missing.txt")
+    except (ValueError, ZeroDivisionError, FileNotFoundError):
+        print("Caught an error, but program continues!\n")
     print("All error types tested successfully!")
